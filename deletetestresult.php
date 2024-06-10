@@ -8,6 +8,7 @@ if (!isset($_GET['result_id'])) {
     $error = "No result ID provided.";
 } else {
     $result_id = $_GET['result_id'];
+    $person_id = $_GET['person_id'];
 
     // Start transaction
     mysqli_begin_transaction($conn);

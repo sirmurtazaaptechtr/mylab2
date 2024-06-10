@@ -9,7 +9,8 @@ $sql_results = "
         r.Hypochromic, r.Macrocytosis, r.Microcytosis, r.Anisocytosis, r.Poikilocytosis, r.lab_no, r.dept_no, 
         r.ref_phy, r.result_desc,
         p.name, p.dob, p.contact,
-        g.gender,
+        g.gender, 
+        r.person_id AS personid,
         ms.status AS marital_status
     FROM results r
     JOIN persons p ON r.person_id = p.person_id
@@ -70,6 +71,7 @@ $result_results = mysqli_query($conn, $sql_results);
                                         <th scope="col">Dept No</th>
                                         <th scope="col">Referring Physician</th>
                                         <th scope="col">Result Description</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,6 +103,12 @@ $result_results = mysqli_query($conn, $sql_results);
                           echo "<td>" . htmlspecialchars($row['dept_no']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['ref_phy']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['result_desc']) . "</td>";
+                          ?>
+                          <td>
+                            <a href="edittestresult.php?person_id=<?php echo $row['personid']; ?>&result_id='<?php echo $row['result_id']; ?>" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="deletetestresult.php?person_id=<?php echo $row['personid']; ?>&result_id='<?php echo $row['result_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this test result?');">Delete</a>
+                          </td>
+                          <?php
                           echo "</tr>";
                       }
                   }
