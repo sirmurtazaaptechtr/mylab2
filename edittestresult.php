@@ -21,7 +21,7 @@ $Hypochromic = $Macrocytosis = $Microcytosis = $Anisocytosis = $Poikilocytosis =
 // Fetch existing data if the person_id is provided
 if (isset($_GET['person_id'])) {
     $person_id = $_GET['person_id'];
-    $person_id = $_GET['person_id'];
+    $result_id = $_GET['result_id'];
 
     // Fetch person details
     $sql_person = "SELECT * FROM persons WHERE person_id = ?";
@@ -77,26 +77,28 @@ if (isset($_GET['person_id'])) {
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+    // Retrieve and sanitize form data
     $result_id = mysqli_real_escape_string($conn, $_POST['result_id']);
-    $person_id = mysqli_real_escape_string($conn, $_POST['person_id']);    
+    $person_id = mysqli_real_escape_string($conn, $_POST['person_id']);
     $lab_no = mysqli_real_escape_string($conn, $_POST['lab_no']);
     $dept_no = mysqli_real_escape_string($conn, $_POST['dept_no']);
     $test_date = mysqli_real_escape_string($conn, $_POST['test_date']);
     $result_date = mysqli_real_escape_string($conn, $_POST['result_date']);
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $dob = mysqli_real_escape_string($conn, $_POST['dob']);
-    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-    $maritial_status = mysqli_real_escape_string($conn, $_POST['maritial_status']);
+    $age = mysqli_real_escape_string($conn, $_POST['age']);
     $contact = mysqli_real_escape_string($conn, $_POST['contact']);
+    $gender_id = mysqli_real_escape_string($conn, $_POST['gender']);
+    $ms_id = mysqli_real_escape_string($conn, $_POST['maritial_status']);
     $result_desc = mysqli_real_escape_string($conn, $_POST['result_desc']);
-    $RBC = mysqli_real_escape_string($conn, $_POST['RBC']);
-    $WBC = mysqli_real_escape_string($conn, $_POST['WBC']);
     $HB = mysqli_real_escape_string($conn, $_POST['HB']);
+    $WBC = mysqli_real_escape_string($conn, $_POST['WBC']);
+    $MP = mysqli_real_escape_string($conn, $_POST['MP']);
     $PCV = mysqli_real_escape_string($conn, $_POST['PCV']);
     $MCV = mysqli_real_escape_string($conn, $_POST['MCV']);
     $MCH = mysqli_real_escape_string($conn, $_POST['MCH']);
     $MCHC = mysqli_real_escape_string($conn, $_POST['MCHC']);
+    $RBC = mysqli_real_escape_string($conn, $_POST['RBC']);
     $Platelets = mysqli_real_escape_string($conn, $_POST['Platelets']);
     $Hypochromic = mysqli_real_escape_string($conn, $_POST['Hypochromic']);
     $Macrocytosis = mysqli_real_escape_string($conn, $_POST['Macrocytosis']);
@@ -107,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Update the person details
     $sql_update_person = "UPDATE persons SET name=?, dob=?, age=?, gender_id=?, ms_id=?, contact=? WHERE person_id=?";
     $stmt_update_person = mysqli_prepare($conn, $sql_update_person);
-    mysqli_stmt_bind_param($stmt_update_person, 'ssisiii', $name, $dob, $age, $gender, $maritial_status, $contact, $person_id);
+    mysqli_stmt_bind_param($stmt_update_person, 'ssisiii', $name, $dob, $age, $gender_id, $ms_id, $contact, $person_id);
     $result_update_person = mysqli_stmt_execute($stmt_update_person);
 
     // Update test result
@@ -128,7 +130,6 @@ $person_id = mysqli_real_escape_string($conn, $_GET['person_id']);
 $sql_select_result = "SELECT * FROM persons INNER JOIN results ON persons.person_id = results.person_id WHERE persons.person_id = $person_id";
 $result = mysqli_query($conn, $sql_select_result);
 $row = mysqli_fetch_assoc($result);
-
 ?>
 
 <main id="main" class="main">
@@ -231,9 +232,9 @@ $row = mysqli_fetch_assoc($result);
                                     <select class="form-control" name="gender" id="gender" required>
                                         <option value="">Select Gender</option>
                                         <?php while ($gender = mysqli_fetch_assoc($genders)) { ?>
-                                        <option value="<?php echo $gender['id']; ?>" <?php if
-                                            ($gender_id==$gender['id']) echo 'selected' ; ?>>
-                                            <?php echo $gender['name']; ?>
+                                        <option value="<?php echo $gender['gender_id']; ?>" <?php if
+                                            ($gender_id==$gender['gender_id']) echo 'selected' ; ?>>
+                                            <?php echo $gender['gender']; ?>
                                         </option>
                                         <?php } ?>
                                     </select>
@@ -245,9 +246,9 @@ $row = mysqli_fetch_assoc($result);
                                     <select class="form-control" name="maritial_status" id="maritial_status" required>
                                         <option value="">Select Marital Status</option>
                                         <?php while ($ms = mysqli_fetch_assoc($maritial_statuses)) { ?>
-                                        <option value="<?php echo $ms['id']; ?>" <?php if ($ms_id==$ms['id'])
+                                        <option value="<?php echo $ms['ms_id']; ?>" <?php if ($ms_id==$ms['ms_id'])
                                             echo 'selected' ; ?>>
-                                            <?php echo $ms['name']; ?>
+                                            <?php echo $ms['status']; ?>
                                         </option>
                                         <?php } ?>
                                     </select>

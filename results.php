@@ -5,7 +5,7 @@ require('./include/header.php');
 // Fetch all results with person name, marital status, and gender
 $sql_results = "
     SELECT 
-        r.result_id, r.test_date, r.result_date, r.HB, r.WBC, r.MP, r.PCV, r.MCV, r.MCH, r.MCHC, r.RBC, r.Platelets, 
+        p.age, r.result_id, r.test_date, r.result_date, r.HB, r.WBC, r.MP, r.PCV, r.MCV, r.MCH, r.MCHC, r.RBC, r.Platelets, 
         r.Hypochromic, r.Macrocytosis, r.Microcytosis, r.Anisocytosis, r.Poikilocytosis, r.lab_no, r.dept_no, 
         r.ref_phy, r.result_desc,
         p.name, p.dob, p.contact,
@@ -51,6 +51,7 @@ $result_results = mysqli_query($conn, $sql_results);
                                         <th scope="col">Name</th>
                                         <th scope="col">Gender</th>
                                         <th scope="col">Marital Status</th>
+                                        <th scope="col">Age</th>
                                         <th scope="col">Test Date</th>
                                         <th scope="col">Result Date</th>
                                         <th scope="col">HB</th>
@@ -83,6 +84,7 @@ $result_results = mysqli_query($conn, $sql_results);
                           echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['gender']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['marital_status']) . "</td>";
+                          echo "<td>" . htmlspecialchars($row['age']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['test_date']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['result_date']) . "</td>";
                           echo "<td>" . htmlspecialchars($row['HB']) . "</td>";
@@ -105,8 +107,8 @@ $result_results = mysqli_query($conn, $sql_results);
                           echo "<td>" . htmlspecialchars($row['result_desc']) . "</td>";
                           ?>
                           <td>
-                            <a href="edittestresult.php?person_id=<?php echo $row['personid']; ?>&result_id='<?php echo $row['result_id']; ?>" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="deletetestresult.php?person_id=<?php echo $row['personid']; ?>&result_id='<?php echo $row['result_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this test result?');">Delete</a>
+                            <a href="edittestresult.php?person_id=<?php echo $row['personid']; ?>&result_id=<?php echo $row['result_id']; ?>" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="deletetestresult.php?person_id=<?php echo $row['personid']; ?>&result_id=<?php echo $row['result_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this test result?');">Delete</a>
                           </td>
                           <?php
                           echo "</tr>";

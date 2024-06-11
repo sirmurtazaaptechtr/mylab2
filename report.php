@@ -4,6 +4,14 @@ require('./include/header.php');
 // Fetch tests
 $sql_tests = "SELECT * FROM `tests`";
 $tests = mysqli_query($conn, $sql_tests);
+
+// Fetch genders
+$sql_genders = "SELECT * FROM `genders`";
+$genders = mysqli_query($conn, $sql_genders);
+
+// Fetch marital statuses
+$sql_marital_statuses = "SELECT * FROM `maritial_statuses`";
+$marital_statuses = mysqli_query($conn, $sql_marital_statuses);
 ?>
 
 <main id="main" class="main">
@@ -41,28 +49,38 @@ $tests = mysqli_query($conn, $sql_tests);
                             </div>
 
                             <div class="row mb-3">
-                                <label for="test" class="col-sm-2 col-form-label">Test</label>
+                                <label for="gender" class="col-sm-2 col-form-label">Gender</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Test Select" name="test" id="test" required>
-                                        <option selected disabled>Open this select menu</option>
-                                        <?php while ($test = mysqli_fetch_assoc($tests)) { ?>
-                                            <option value="<?php echo $test['test_id'] ?>"><?php echo $test['test_name'] ?></option>
+                                    <select class="form-select" aria-label="Gender Select" name="gender" id="gender" required>
+                                        <option selected disabled>Select Gender</option>
+                                        <?php while ($gender = mysqli_fetch_assoc($genders)) { ?>
+                                            <option value="<?php echo $gender['gender_id'] ?>"><?php echo $gender['gender'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="min_range" class="col-sm-2 col-form-label">Min Range</label>
+                                <label for="marital_status" class="col-sm-2 col-form-label">Marital Status</label>
                                 <div class="col-sm-10">
-                                    <input type="number" step="0.01" class="form-control" name="min_range" id="min_range" required>
+                                    <select class="form-select" aria-label="Marital Status Select" name="marital_status" id="marital_status" required>
+                                        <option selected disabled>Select Marital Status</option>
+                                        <?php while ($ms = mysqli_fetch_assoc($marital_statuses)) { ?>
+                                            <option value="<?php echo $ms['ms_id'] ?>"><?php echo $ms['status'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="max_range" class="col-sm-2 col-form-label">Max Range</label>
+                                <label for="test" class="col-sm-2 col-form-label">Test</label>
                                 <div class="col-sm-10">
-                                    <input type="number" step="0.01" class="form-control" name="max_range" id="max_range" required>
+                                    <select class="form-select" aria-label="Test Select" name="test" id="test" required>
+                                        <option selected disabled>Select Test</option>
+                                        <?php while ($test = mysqli_fetch_assoc($tests)) { ?>
+                                            <option value="<?php echo $test['test_id'] ?>"><?php echo $test['test_name'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
 

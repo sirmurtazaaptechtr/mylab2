@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2024 at 05:11 PM
+-- Generation Time: Jun 11, 2024 at 12:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -98,8 +98,9 @@ CREATE TABLE `persons` (
 
 INSERT INTO `persons` (`person_id`, `name`, `dob`, `age`, `contact`, `gender_id`, `ms_id`, `role_id`) VALUES
 (1, 'Syed Murtaza Hussain', '1984-12-03', 0, '0314-2308332', 1, 2, 1),
-(7, 'aaaa', '2024-05-31', 0, '11111', 2, 2, 3),
-(8, 'Ali Baba', '2024-05-31', 0, '0312-1234567', 1, 1, 3);
+(9, 'Ali Raza', NULL, 40, '1234-1234567', 1, 1, NULL),
+(10, 'Abdul Hadi', NULL, 20, '0322-2312619', 1, 1, NULL),
+(11, 'Abdul Samad', NULL, 20, '0322-2312619', 1, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -111,15 +112,15 @@ CREATE TABLE `results` (
   `result_id` int(11) NOT NULL,
   `test_date` date DEFAULT NULL,
   `result_date` date DEFAULT NULL,
-  `HB` int(11) DEFAULT NULL,
-  `WBC` int(11) DEFAULT NULL,
-  `MP` int(11) DEFAULT NULL,
-  `PCV` int(11) DEFAULT NULL,
-  `MCV` int(11) DEFAULT NULL,
-  `MCH` int(11) DEFAULT NULL,
-  `MCHC` int(11) DEFAULT NULL,
-  `RBC` int(11) DEFAULT NULL,
-  `Platelets` int(11) DEFAULT NULL,
+  `HB` float DEFAULT NULL,
+  `WBC` float DEFAULT NULL,
+  `MP` float DEFAULT NULL,
+  `PCV` float DEFAULT NULL,
+  `MCV` float DEFAULT NULL,
+  `MCH` float DEFAULT NULL,
+  `MCHC` float DEFAULT NULL,
+  `RBC` float DEFAULT NULL,
+  `Platelets` float DEFAULT NULL,
   `Hypochromic` varchar(25) DEFAULT NULL,
   `Macrocytosis` varchar(25) DEFAULT NULL,
   `Microcytosis` varchar(25) DEFAULT NULL,
@@ -131,6 +132,15 @@ CREATE TABLE `results` (
   `ref_phy` varchar(25) DEFAULT NULL,
   `result_desc` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`result_id`, `test_date`, `result_date`, `HB`, `WBC`, `MP`, `PCV`, `MCV`, `MCH`, `MCHC`, `RBC`, `Platelets`, `Hypochromic`, `Macrocytosis`, `Microcytosis`, `Anisocytosis`, `Poikilocytosis`, `person_id`, `lab_no`, `dept_no`, `ref_phy`, `result_desc`) VALUES
+(1, '2024-06-10', '2024-06-10', 10, 20, 30, 40, 50, 60, 70, 80, 90, '+', '++', '+++', '++++', '+++++', 9, '12', '13', NULL, ''),
+(2, '2024-06-10', '2024-06-10', 11, 12, 13, 14, 15, 16, 17, 18, 19, '+', '++', '+++', '++++', '+++++', 10, '13', '13', NULL, ''),
+(3, '2024-06-10', '2024-06-11', 11.7, 12.99, 13.6, 14, 15, 16.7, 17, 18, 1024480, '+', '++', '+++', '++++', '+++++', 11, '13', '13', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -255,13 +265,13 @@ ALTER TABLE `maritial_statuses`
 -- AUTO_INCREMENT for table `persons`
 --
 ALTER TABLE `persons`
-  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `roles`

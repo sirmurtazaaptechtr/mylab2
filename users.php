@@ -67,8 +67,8 @@ $result = mysqli_query($conn,$sql);
                   <td><?php echo $data['username']?></td>
                   <td><?php echo $data['password']?></td>
                   <td>
-                    <a href="edituser.php?person_id=<?php echo $data["person_id"];?>">Edit</a> | 
-                    <a href="deleteuser.php?person_id=<?php echo $data["person_id"];?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                    <a class="btn btn-sm btn-info" href="edituser.php?person_id=<?php echo $data["person_id"];?>">Edit</a> | 
+                    <a class="btn btn-sm btn-danger" href="deleteuser.php?person_id=<?php echo $data["person_id"];?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                   </td>
                 </tr>
                 <?php $srno++; }?>

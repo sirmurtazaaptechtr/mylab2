@@ -3,10 +3,47 @@
 require('./include/header.php');
 
 // Query to fetch summary data
-$sql_summary = "SELECT t.test_name, COUNT(r.result_id) AS test_count 
-                FROM tests t 
-                LEFT JOIN results r ON t.test_id = r.test_id 
-                GROUP BY t.test_name";
+$sql_summary = "SELECT 
+                    'HB' AS test_name, COUNT(HB) AS test_count FROM results
+                UNION
+                SELECT 
+                    'WBC' AS test_name, COUNT(WBC) AS test_count FROM results
+                UNION
+                SELECT 
+                    'MP' AS test_name, COUNT(MP) AS test_count FROM results
+                UNION
+                SELECT 
+                    'PCV' AS test_name, COUNT(PCV) AS test_count FROM results
+                UNION
+                SELECT 
+                    'MCV' AS test_name, COUNT(MCV) AS test_count FROM results
+                UNION
+                SELECT 
+                    'MCH' AS test_name, COUNT(MCH) AS test_count FROM results
+                UNION
+                SELECT 
+                    'MCHC' AS test_name, COUNT(MCHC) AS test_count FROM results
+                UNION
+                SELECT 
+                    'RBC' AS test_name, COUNT(RBC) AS test_count FROM results
+                UNION
+                SELECT 
+                    'Platelets' AS test_name, COUNT(Platelets) AS test_count FROM results
+                UNION
+                SELECT 
+                    'Hypochromic' AS test_name, COUNT(Hypochromic) AS test_count FROM results
+                UNION
+                SELECT 
+                    'Macrocytosis' AS test_name, COUNT(Macrocytosis) AS test_count FROM results
+                UNION
+                SELECT 
+                    'Microcytosis' AS test_name, COUNT(Microcytosis) AS test_count FROM results
+                UNION
+                SELECT 
+                    'Anisocytosis' AS test_name, COUNT(Anisocytosis) AS test_count FROM results
+                UNION
+                SELECT 
+                    'Poikilocytosis' AS test_name, COUNT(Poikilocytosis) AS test_count FROM results";
 $summary_result = mysqli_query($conn, $sql_summary);
 ?>
 
