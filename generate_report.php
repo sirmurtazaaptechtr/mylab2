@@ -53,7 +53,7 @@ WHERE p.age BETWEEN $min_age AND $max_age
         </nav>
     </div><!-- End Page Title -->
 
-    <h1 class="display1"><?php echo $test_id;?></h1>
+    
 
     <section class="section">
         <div class="row">
@@ -61,6 +61,7 @@ WHERE p.age BETWEEN $min_age AND $max_age
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Report Summary</h5>
+                        <h6 class="h6"><?php echo $test_id . " between " . $min_val . " and " . $max_val;?></h6>
                         <p>Total Results: <?php echo isset($total_results) ? $total_results : "0"; ?></p>
                     </div>
                 </div>
