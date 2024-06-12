@@ -86,14 +86,14 @@ $marital_statuses = mysqli_query($conn, $sql_marital_statuses);
                             <div class="row mb-3">
                                 <label for="min_val" class="col-sm-2 col-form-label">Min Value</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="min_val" id="min_val" required>
+                                    <input type="text" class="form-control" name="min_val" id="min_val" required>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="max_val" class="col-sm-2 col-form-label">Max Value</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="max_val" id="max_val" required>
+                                    <input type="text" class="form-control" name="max_val" id="max_val" required>
                                 </div>
                             </div>
 
