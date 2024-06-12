@@ -6,6 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $min_age = $_POST['min_age'];
     $max_age = $_POST['max_age'];
+    $min_val = $_POST['min_val'];
+    $max_val = $_POST['max_val'];
     $gender_id = $_POST['gender'];
     $marital_status_id = $_POST['marital_status'];
     $test_id = $_POST['test'];
@@ -15,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 JOIN persons p ON r.person_id = p.person_id
 WHERE p.age BETWEEN $min_age AND $max_age 
             AND p.gender_id = $gender_id 
-            AND p.ms_id = $marital_status_id";
+            AND p.ms_id = $marital_status_id
+            AND r.`$test_id` BETWEEN $min_val AND $max_val";
     $result_count = mysqli_query($conn, $sql_count);
     $row_count = mysqli_fetch_assoc($result_count);
     $total_results = $row_count['total_results'];
@@ -49,6 +52,8 @@ WHERE p.age BETWEEN $min_age AND $max_age
             </ol>
         </nav>
     </div><!-- End Page Title -->
+
+    <h1 class="display1"><?php echo $test_id;?></h1>
 
     <section class="section">
         <div class="row">
