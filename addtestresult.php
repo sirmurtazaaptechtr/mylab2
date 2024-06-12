@@ -68,6 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (mysqli_stmt_execute($stmt_result)) {
                 echo "New test result added successfully!";
+                
+                // Redirect to the results page
+                header("Location: results.php");
+                exit();
             } else {
                 $error_message = "Error inserting into results: " . mysqli_error($conn);
             }
